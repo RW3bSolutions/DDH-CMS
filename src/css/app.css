@@ -1,0 +1,30 @@
+/* app global css */
+
+.lh-1 {
+  line-height: 1;
+}
+
+.bg-mygas-yellow {
+  background-color: #FFFF01;
+}
+.bg-mygas-red {
+  background-color: #FE2F1F;
+}
+.bg-mygas-orange {
+  background-color: #FFCB0C;
+}
+
+.btn-logout {
+  color: white;
+  border-radius: 20px 0 0 20px;
+}
+
+/* th { */
+  /* background-color: #FE2F1F !important; */
+  /* color: white !important; */
+  /* border-right: 1px solid white !important; */
+/* } */
+
+/* th:last-child {
+  border-right: 0 solid white !important;
+} */
