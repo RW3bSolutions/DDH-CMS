@@ -1,6 +1,6 @@
-# My Gas Credit Management System (mygas)
+# DDH - UDDS
 
-Credit Management System
+UDDS
 
 ## Install the dependencies
 ```bash
