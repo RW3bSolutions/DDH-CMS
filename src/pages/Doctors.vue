@@ -79,14 +79,8 @@
         </q-card-section>
         <q-separator/>
         <q-card-section>
-          <div class="q-mb-sm">
-            <q-input filled color="dark" label="Name *" square="" v-model="form.name" :dense="true" autofocus="" />
-            <div class="text-caption text-red" v-if="errors.form.name && errors.show">
-              {{ errors.form.name[0] }}
-            </div>
-          </div>
           <div :class="ifEdit ? '' : 'q-mb-sm'">
-            <q-input filled color="dark" label="Username *" square="" v-model="form.username" :dense="true" >
+            <q-input filled color="dark" label="Name *" square="" v-model="form.name" :dense="true" autofocus >
               <template v-slot:after v-if="ifEdit">
                 <q-toggle
                   size="sm"
@@ -99,8 +93,8 @@
                 />
               </template>
             </q-input>
-            <div class="text-caption text-red" v-if="errors.form.username && errors.show">
-              {{ errors.form.username[0] }}
+            <div class="text-caption text-red" v-if="errors.form.name && errors.show">
+              {{ errors.form.name[0] }}
             </div>
           </div>
           <div v-if="!ifEdit">
@@ -139,9 +133,9 @@ export default defineComponent({
       rows: [],
       columns: [
         {
-          name: 'qr_code',
-          label: 'QR CODE',
-          field: row => row.qr_code,
+          name: 'username',
+          label: 'QR CODE/USERNAME',
+          field: row => row.username,
           align: 'left',
           sortable: true
         },
@@ -149,13 +143,6 @@ export default defineComponent({
           name: 'name',
           label: 'NAME',
           field: row => row.name,
-          align: 'left',
-          sortable: true
-        },
-        {
-          name: 'username',
-          label: 'USERNAME',
-          field: row => row.username,
           align: 'left',
           sortable: true
         },
@@ -183,7 +170,6 @@ export default defineComponent({
       ifEdit: false,
       ifView: false,
       form: {
-        username: null,
         password: null,
         name: null,
         role: 'Doctor',
@@ -192,7 +178,6 @@ export default defineComponent({
       errors: {
         show: false,
         form: {
-          username: null,
           password: null,
           name: null,
           role: null
@@ -225,7 +210,6 @@ export default defineComponent({
       this.form.is_active = 1
       this.form.name = null
       this.form.role = 'Doctor'
-      this.form.username = null
       this.form.password = null
     },
 
@@ -236,7 +220,6 @@ export default defineComponent({
         is_active: this.form.is_active,
         name: this.form.name,
         role: this.form.role,
-        username: this.form.username,
         password: this.form.password
       }, {
         headers: {
@@ -272,7 +255,6 @@ export default defineComponent({
       this.form.is_active = param.is_active
       this.form.name = param.name
       this.form.role = 'Doctor'
-      this.form.username = param.username
     },
 
     update () {
@@ -281,7 +263,6 @@ export default defineComponent({
       this.$api.post('/doctors/' + this.object.id, {
         name: this.form.name,
         role: this.form.role,
-        username: this.form.username,
         is_active: this.form.is_active,
         _method: 'PUT'
       }, {
@@ -293,7 +274,6 @@ export default defineComponent({
           this.object.is_active = this.form.is_active
           this.object.name = this.form.name
           this.object.role = this.form.role
-          this.object.username = this.form.username
           this.modal = false
           this.$q.notify({
             progress: true,
