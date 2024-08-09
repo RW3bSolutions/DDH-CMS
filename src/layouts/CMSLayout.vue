@@ -2,34 +2,16 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="bg-grey-1 text-dark">
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
         <q-toolbar-title>
-          <img
-            alt="Home Icon"
-            src="~assets/logo-ddh.png"
-            style="max-width: 300px;"
-          >
+          <img alt="Home Icon" src="~assets/logo-ddh.png" style="max-width: 300px;">
         </q-toolbar-title>
         <q-btn icon="logout" label="Logout" class="btn-logout bg-dark" @click="onLogout()" flat v-if="$q.screen.gt.xs" />
         <q-btn icon="logout" color="dark" @click="onLogout()" flat v-else />
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      class="bg-white"
-      :width="150"
-      :behavior="$q.screen.gt.sm ? 'desktop' : 'mobile'"
-    >
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="bg-white" :width="150" :behavior="$q.screen.gt.sm ? 'desktop' : 'mobile'">
       <q-scroll-area class="fit">
         <div class="">
           <q-tabs vertical>

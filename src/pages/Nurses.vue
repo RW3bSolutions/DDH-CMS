@@ -1,15 +1,9 @@
 <template>
   <div class="" v-if="role === 'Admin' || role === 'CMS'">
     <div class="fixed-center text-center" v-if="preload">
-      <q-spinner-facebook
-        color="dark"
-        size="3em"
-        :thickness="10"
-      />
+      <q-spinner-facebook color="dark" size="3em" :thickness="10" />
       <q-tooltip :offset="[0, 8]">Loading..</q-tooltip>
-      <div class="q-mt-md">
-        Please wait.
-      </div>
+      <div class="q-mt-md">Please wait.</div>
     </div>
 
     <div v-else>
@@ -32,18 +26,9 @@
         </div>
       </div>
 
-      <q-separator/>
+      <q-separator />
       <div class="q-pa-md">
-        <q-table
-          square
-          :dense="true"
-          :rows="rows"
-          :columns="columns"
-          row-key="index"
-          :filter="filter"
-          v-model:pagination="pagination"
-          separator="cell"
-        >
+        <q-table square :dense="true" :rows="rows" :columns="columns" row-key="index" :filter="filter" v-model:pagination="pagination" separator="cell">
           <template v-slot:body-cell-no="props">
             <q-td :props="props">
               <div>{{ props.rowIndex + 1 }}</div>
@@ -64,33 +49,22 @@
           </template>
         </q-table>
       </div>
-
     </div>
   </div>
 
   <q-dialog v-model="modal">
-    <q-card style="width: 700px; max-width: 80vw;">
+    <q-card style="width: 700px; max-width: 80vw">
       <form @submit.prevent="ifEdit ? update() : store()">
         <q-card-section>
-          <div class="text-h6">{{ ifEdit ? 'UPDATE NURSE' : 'NEW NURSE' }}</div>
-          <div class="text-caption text-red">
-            Required *
-          </div>
+          <div class="text-h6">{{ ifEdit ? "UPDATE NURSE" : "NEW NURSE" }}</div>
+          <div class="text-caption text-red">Required *</div>
         </q-card-section>
-        <q-separator/>
+        <q-separator />
         <q-card-section>
           <div class="q-mb-sm">
-            <q-input filled color="dark" label="Name *" square="" v-model="form.name" :dense="true" autofocus >
+            <q-input filled color="dark" label="Name *" square="" v-model="form.name" :dense="true" autofocus>
               <template v-slot:after v-if="ifEdit">
-                <q-toggle
-                  size="sm"
-                  class="text-caption text-weight-medium"
-                  color="green"
-                  label="Active"
-                  v-model="form.is_active"
-                  :true-value="1"
-                  :false-value="0"
-                />
+                <q-toggle size="sm" class="text-caption text-weight-medium" color="green" label="Active" v-model="form.is_active" :true-value="1" :false-value="0" />
               </template>
             </q-input>
             <div class="text-caption text-red" v-if="errors.form.name && errors.show">
@@ -110,22 +84,17 @@
             </div>
           </div>
         </q-card-section>
-        <q-separator/>
+        <q-separator />
         <q-card-section class="bg-white text-right" v-if="!submitted">
-          <q-btn square type="submit" :color="ifEdit ? 'primary' : 'green'" :label="ifEdit ? 'Update' : 'Save'"/>
+          <q-btn square type="submit" :color="ifEdit ? 'primary' : 'green'" :label="ifEdit ? 'Update' : 'Save'" />
         </q-card-section>
         <q-card-section class="text-center" v-if="submitted">
-          <q-spinner
-            color="dark"
-            size="md"
-            :thickness="10"
-          />
+          <q-spinner color="dark" size="md" :thickness="10" />
         </q-card-section>
-        <q-separator/>
+        <q-separator />
       </form>
     </q-card>
   </q-dialog>
-
 </template>
 
 <script>
@@ -141,14 +110,14 @@ export default defineComponent({
         {
           name: 'username',
           label: 'QR CODE/USERNAME',
-          field: row => row.username,
+          field: (row) => row.username,
           align: 'left',
           sortable: true
         },
         {
           name: 'name',
           label: 'NAME',
-          field: row => row.name,
+          field: (row) => row.name,
           align: 'left',
           sortable: true
         },
@@ -156,21 +125,21 @@ export default defineComponent({
         {
           name: 'role',
           label: 'ROLE',
-          field: row => row.role,
+          field: (row) => row.role,
           align: 'left',
           sortable: true
         },
         {
           name: 'is_active',
           label: 'ACTIVE',
-          field: row => row.is_active,
+          field: (row) => row.is_active,
           align: 'center',
           style: 'width: 5%'
         },
         {
           name: 'action',
           label: '-',
-          field: row => row,
+          field: (row) => row,
           align: 'center',
           style: 'width: 5%'
         }
@@ -205,12 +174,13 @@ export default defineComponent({
   },
   methods: {
     index () {
-      this.$api.get('/nurses', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token')
-        }
-      })
-        .then(response => {
+      this.$api
+        .get('/nurses', {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+          }
+        })
+        .then((response) => {
           this.rows = response.data
           this.preload = false
         })
@@ -230,17 +200,22 @@ export default defineComponent({
     store () {
       this.submitted = true
       this.errors.show = false
-      this.$api.post('/nurses', {
-        is_active: this.form.is_active,
-        name: this.form.name,
-        role: this.form.role,
-        password: this.form.password
-      }, {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token')
-        }
-      })
-        .then(response => {
+      this.$api
+        .post(
+          '/nurses',
+          {
+            is_active: this.form.is_active,
+            name: this.form.name,
+            role: this.form.role,
+            password: this.form.password
+          },
+          {
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+          }
+        )
+        .then((response) => {
           this.rows.push(response.data)
           this.submitted = false
           this.modal = false
@@ -251,7 +226,7 @@ export default defineComponent({
             icon: 'check'
           })
         })
-        .catch(error => {
+        .catch((error) => {
           if (error.response.status === 422) {
             this.errors.form = error.response.data.errors
             this.errors.show = true
@@ -274,17 +249,22 @@ export default defineComponent({
     update () {
       this.submitted = true
       this.errors.show = false
-      this.$api.post('/nurses/' + this.object.id, {
-        name: this.form.name,
-        role: this.form.role,
-        is_active: this.form.is_active,
-        _method: 'PUT'
-      }, {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token')
-        }
-      })
-        .then(response => {
+      this.$api
+        .post(
+          '/nurses/' + this.object.id,
+          {
+            name: this.form.name,
+            role: this.form.role,
+            is_active: this.form.is_active,
+            _method: 'PUT'
+          },
+          {
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+          }
+        )
+        .then((response) => {
           this.object.is_active = this.form.is_active
           this.object.name = this.form.name
           this.object.role = this.form.role
@@ -296,7 +276,7 @@ export default defineComponent({
             icon: 'check'
           })
         })
-        .catch(error => {
+        .catch((error) => {
           if (error.response.status === 422) {
             this.errors.form = error.response.data.errors
             this.errors.show = true

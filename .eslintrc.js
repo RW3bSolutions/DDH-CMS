@@ -70,6 +70,8 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
+
+    "quotes": ["error", "single"],
     
     'prefer-promise-reject-errors': 'off',
 
