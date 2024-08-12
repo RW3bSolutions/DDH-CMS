@@ -1,11 +1,7 @@
 <template>
   <div class="" v-if="role === 'Admin' || role === 'CMS'">
     <div class="fixed-center text-center" v-if="preload">
-      <q-spinner-facebook
-        color="dark"
-        size="3em"
-        :thickness="10"
-      />
+      <q-spinner-facebook color="dark" size="3em" :thickness="10" />
       <q-tooltip :offset="[0, 8]">Loading..</q-tooltip>
       <div class="q-mt-md">
         Please wait.
@@ -32,18 +28,9 @@
         </div>
       </div>
 
-      <q-separator/>
+      <q-separator />
       <div class="q-pa-md">
-        <q-table
-          square
-          :dense="true"
-          :rows="rows"
-          :columns="columns"
-          row-key="index"
-          :filter="filter"
-          v-model:pagination="pagination"
-          separator="cell"
-        >
+        <q-table square :dense="true" :rows="rows" :columns="columns" row-key="index" :filter="filter" v-model:pagination="pagination" separator="cell">
           <template v-slot:body-cell-no="props">
             <q-td :props="props">
               <div>{{ props.rowIndex + 1 }}</div>
@@ -77,20 +64,12 @@
             Required *
           </div>
         </q-card-section>
-        <q-separator/>
+        <q-separator />
         <q-card-section>
           <div :class="ifEdit ? '' : 'q-mb-sm'">
-            <q-input filled color="dark" label="Name *" square="" v-model="form.name" :dense="true" autofocus >
+            <q-input filled color="dark" label="Name *" square="" v-model="form.name" :dense="true" autofocus>
               <template v-slot:after v-if="ifEdit">
-                <q-toggle
-                  size="sm"
-                  class="text-caption text-weight-medium"
-                  color="green"
-                  label="Active"
-                  v-model="form.is_active"
-                  :true-value="1"
-                  :false-value="0"
-                />
+                <q-toggle size="sm" class="text-caption text-weight-medium" color="green" label="Active" v-model="form.is_active" :true-value="1" :false-value="0" />
               </template>
             </q-input>
             <div class="text-caption text-red" v-if="errors.form.name && errors.show">
@@ -104,18 +83,14 @@
             </div>
           </div>
         </q-card-section>
-        <q-separator/>
+        <q-separator />
         <q-card-section class="bg-white text-right" v-if="!submitted">
-          <q-btn square type="submit" :color="ifEdit ? 'primary' : 'green'" :label="ifEdit ? 'Update' : 'Save'"/>
+          <q-btn square type="submit" :color="ifEdit ? 'primary' : 'green'" :label="ifEdit ? 'Update' : 'Save'" />
         </q-card-section>
         <q-card-section class="text-center" v-if="submitted">
-          <q-spinner
-            color="dark"
-            size="md"
-            :thickness="10"
-          />
+          <q-spinner color="dark" size="md" :thickness="10" />
         </q-card-section>
-        <q-separator/>
+        <q-separator />
       </form>
     </q-card>
   </q-dialog>
@@ -199,6 +174,8 @@ export default defineComponent({
         .then(response => {
           this.rows = response.data
           this.preload = false
+        }).catch(error => {
+          console.log(error)
         })
     },
 
