@@ -27,6 +27,21 @@ const routes = [
         path: '/nurses',
         component: () => import('pages/Nurses.vue'),
         name: 'Nurses'
+      },
+      {
+        path: '/assignment',
+        component: () => import('pages/assignment/Index.vue'),
+        name: 'AssignIndex'
+      },
+      {
+        path: '/assignment/:id',
+        component: () => import('pages/assignment/Show.vue'),
+        name: 'AssignShow'
+      },
+      {
+        path: '/assignment/create/:id',
+        component: () => import('pages/assignment/Create.vue'),
+        name: 'AssignCreate'
       }
     ],
     meta: {

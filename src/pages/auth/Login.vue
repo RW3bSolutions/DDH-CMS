@@ -21,9 +21,7 @@
         <q-spinner color="primary" size="3em" :thickness="10" v-if="submitted" />
         <q-btn v-else square color="dark" rounded size="md" label="Sign in" no-caps class="full-width" @click="onLogin()"></q-btn>
       </q-card-section>
-      <q-card-section class="text-center q-pt-none">
-        <div class="text-grey-8">Don't have an account yet?</div>
-      </q-card-section>
+
     </q-card>
   </q-page>
 </template>
