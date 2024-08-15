@@ -39,7 +39,7 @@
               <td>{{ v.username }}</td>
               <td class="text-center">{{ v.name }}</td>
               <td>
-                <q-btn size="sm" :loading="submitted" icon="close" color="red" @click="delete(v.id)" />
+                <q-btn size="sm" icon="close" color="red" @click="remove(v.id)" />
               </td>
             </tr>
           </tbody>
@@ -93,10 +93,10 @@ export default defineComponent({
         })
     },
 
-    delete (params) {
+    remove (params) {
       this.submitted = true
       this.$api
-        .post('/stations' + params, {
+        .post('/stations/' + params, {
           _method: 'DELETE'
         }, {
           headers: {
@@ -113,6 +113,8 @@ export default defineComponent({
 
           this.index()
           this.submitted = false
+        }).catch(err => {
+          console.log(err)
         })
     },
 

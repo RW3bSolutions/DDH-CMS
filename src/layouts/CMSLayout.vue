@@ -33,7 +33,7 @@
                 <div class="text-caption text-weight-medium lh-1 q-pt-xs">Nurses</div>
               </div>
             </q-route-tab>
-            <q-route-tab :class="$route.name === 'AssignIndex' || 'AssignCreate' || 'AssignShow' ? 'bg-dark text-white' : 'text-dark'" to="/assignment">
+            <q-route-tab :class="$route.name === 'AssignIndex' ? 'bg-dark text-white' : 'text-dark'" to="/assignment">
               <div class="q-py-sm">
                 <q-icon name="fa-solid fa-person-circle-plus" size="md" />
                 <div class="text-caption text-weight-medium lh-1 q-pt-xs">Assignment</div>
