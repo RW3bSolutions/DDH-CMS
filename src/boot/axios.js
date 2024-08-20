@@ -7,7 +7,7 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'https://web.udds.rwebcloud.net/' })
+const api = axios.create({ baseURL: 'https://web.udds.rwebcloud.net' })
 const ddhApi = axios.create({ baseURL: 'https://api.udds.rwebcloud.net' })
 // const api = axios.create({ baseURL: 'https://web.udds.rwebcloud.net/api' })
 
